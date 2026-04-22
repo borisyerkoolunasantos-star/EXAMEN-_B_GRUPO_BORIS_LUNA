@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Agenda de Citas</h2>
+
+<a href="/agendar" class="btn mb-3" style="background-color:#3cb371; color:white;">
+    + Nueva Cita
+</a>
+
+<div class="row">
+    {% for p in pacientes %}
+    <div class="col-md-4 mb-3">
+        <div class="card" style="border-radius:10px;">
+
+            <div class="card-header text-white"
+                 style="background-color:#3cb371;">
+                 {{ p.mascota }}
+            </div>
+
+            <div class="card-body">
+                <p><strong>Propietario:</strong> {{ p.propietario }}</p>
+                <p><strong>Especie:</strong> {{ p.especie }}</p>
+                <p><strong>Fecha:</strong> {{ p.fecha }}</p>
+            </div>
+
+            <div class="card-footer">
+                <a href="/modificar/{{ p.id }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/cancelar/{{ p.id }}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Cancelar esta cita?')">Cancelar</a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if pacientes|length == 0 %}
+    <p class="text-muted">No hay citas registradas aún.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
