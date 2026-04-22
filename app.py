@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
+
 app = Flask(__name__)
 
 def get_db():
@@ -11,7 +12,7 @@ def init_db():
     conn = get_db()
     conn.execute('''
         CREATE TABLE IF NOT EXISTS pacientes (
-            id  INTEGER PRIMARY KEY AUTOINCREMENT,
+            id     INTEGER PRIMARY KEY AUTOINCREMENT,
             mascota   TEXT NOT NULL,
             propietario TEXT NOT NULL,
             especie   TEXT,
@@ -78,6 +79,8 @@ def cancelar(id):
     conn.commit()
     conn.close()
     return redirect('/')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
